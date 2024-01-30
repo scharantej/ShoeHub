@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{{ shoe.name }}</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<h1>Shoe Store</h1>
+<nav>
+<a href="/">Home</a>
+<a href="/products">Products</a>
+<a href="/cart">Cart</a>
+<a href="/checkout">Checkout</a>
+</nav>
+</header>
+<main>
+<section>
+<h2>{{ shoe.name }}</h2>
+<img src="{{ shoe.image }}" alt="{{ shoe.name }}">
+<p>{{ shoe.description }}</p>
+<p>{{ shoe.price | format_currency }}</p>
+<form action="/add_to_cart" method="POST">
+<input type="hidden" name="shoe_id" value="{{ shoe.id }}">
+<input type="number" name="quantity" value="1">
+<input type="submit" value="Add to Cart">
+</form>
+</section>
+</main>
+<footer>
+<p>Copyright &copy; 2023 Shoe Store</p>
+</footer>
+</body>
+</html>
+
+
