@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cart</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<h1>Shoe Store</h1>
+<nav>
+<a href="/">Home</a>
+<a href="/products">Products</a>
+<a href="/cart">Cart</a>
+<a href="/checkout">Checkout</a>
+</nav>
+</header>
+<main>
+<section>
+<h2>Cart</h2>
+<div class="cart-items">
+{% for item in cart_items %}
+<div class="cart-item">
+<img src="{{ item.shoe.image }}" alt="{{ item.shoe.name }}">
+<h3>{{ item.shoe.name }}</h3>
+<p>{{ item.quantity }} x {{ item.shoe.price | format_currency }}</p>
+<form action="/update_cart" method="POST">
+<input type="hidden" name="shoe_id" value="{{ item.shoe.id }}">
+<input type="number" name="quantity" value="{{ item.quantity }}">
+<input type="submit" value="Update">
+</form>
+<form action="/remove_from_cart" method="POST">
+<input type="hidden" name="shoe_id" value="{{ item.shoe.id }}">
+<input type="submit" value="Remove">
+</form>
+</div>
+{% endfor %}
+</div>
+<p>Total Price: {{ total_price | format_currency }}</p>
+<a href="/checkout">Checkout</a>
+</section>
+</main>
+<footer>
+<p>Copyright &copy; 2023 Shoe Store</p>
+</footer>
+</body>
+</html>
+
+
