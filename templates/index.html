@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Shoe Store</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<h1>Shoe Store</h1>
+<nav>
+<a href="/">Home</a>
+<a href="/products">Products</a>
+<a href="/cart">Cart</a>
+<a href="/checkout">Checkout</a>
+</nav>
+</header>
+<main>
+<section>
+<h2>Welcome to our shoe store!</h2>
+<p>We have a wide variety of shoes for you to choose from. Whether you're looking for sneakers, boots, or sandals, we have something for everyone.</p>
+<p>Take a look around and find the perfect pair of shoes for you.</p>
+</section>
+<section>
+<h2>Featured Products</h2>
+<div class="products">
+{% for shoe in shoes %}
+<div class="product">
+<a href="/product/{{ shoe.id }}">
+<img src="{{ shoe.image }}" alt="{{ shoe.name }}">
+<h3>{{ shoe.name }}</h3>
+<p>{{ shoe.price | format_currency }}</p>
+</a>
+<form action="/add_to_cart" method="POST">
+<input type="hidden" name="shoe_id" value="{{ shoe.id }}">
+<input type="number" name="quantity" value="1">
+<input type="submit" value="Add to Cart">
+</form>
+</div>
+{% endfor %}
+</div>
+</section>
+</main>
+<footer>
+<p>Copyright &copy; 2023 Shoe Store</p>
+</footer>
+</body>
+</html>
+
+
